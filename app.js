@@ -21,25 +21,30 @@ trackImages.addEventListener('click', collectTrackerDataFromClick);
 
 //SurveyImage.prototype.renderImage = function (){
 
-var position1 = document.getElementById('image1');
+var position = document.getElementById('image1');
 //position1.textContent = 'img/bag.jpg';
-var imageleft = document.createElement('img');
-var position2 = document.getElementById('image2');
-var imagemiddle = document.createElement('img');
-var position3 = document.getElementById('image3');
+var imageLeft = document.createElement('img');
+var position2 = document.getElementById('image1');
+var imageMiddle = document.createElement('img');
+var position3 = document.getElementById('image1');
 var imageRight = document.createElement('img');
 
 function placeImage(idtag){
-  imageleft.setAttribute('src', randomImages[getRandomImage(0,20)]);
-  console.log(imageleft.setAttribute);
+  var selectImage1 = randomImages[getRandomImage(0,19)];
+  imageLeft.setAttribute('src', selectImage1);
+  console.log(selectImage1);
   var choice1 = document.getElementById(idtag);
-  choice1.appendChild(imageleft);
+  choice1.appendChild(imageLeft);
 
-  imagemiddle.setAttribute('src', randomImages[getRandomImage(0,20)]);
+  var selectImage2 = randomImages[getRandomImage(0,19)];
+  imageMiddle.setAttribute('src', selectImage2);
+  console.log(selectImage2);
   var choice2 = document.getElementById(idtag);
-  choice2.appendChild(imagemiddle);
+  choice2.appendChild(imageMiddle);
 
-  imageRight.setAttribute('src', randomImages[getRandomImage(0,20)]);
+  var selectImage3 = randomImages[getRandomImage(0,19)];
+  imageRight.setAttribute('src', selectImage3);
+  console.log(selectImage3);
   var choice3 = document.getElementById(idtag);
   choice3.appendChild(imageRight);
 }
