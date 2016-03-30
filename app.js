@@ -41,6 +41,7 @@ function placeImage(idtag){
   imageRight.setAttribute('src', selectImage3);
   console.log(selectImage3);
   choice3.appendChild(imageRight);
+
 }
 
 function deleteImages(image){
