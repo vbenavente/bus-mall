@@ -59,6 +59,31 @@ function placeImage(){
   displayImages.appendChild(imagesDisplayArray[2]);
 }
 
+function createButtons(){
+  var buttonResults = document.createElement('button');
+  buttonResults.addEventListener('click', chart);
+  var buttonMoreClicks = document.createElement('button');
+  buttonMoreClicks.addEventListener('click', collectTrackerDataFromClick2);
+
+  return [buttonResults, buttonMoreClicks];
+}
+
+function chart(){
+  console.log('poop');
+}
+function collectTrackerDataFromClick2(){
+  console.log('dontcare');
+}
+
+function placeButtons(){
+  var displayButtons = document.getElementById('display-buttons');
+  var buttonsDisplayArray = createButtons();
+  displayButtons.appendChild(buttonsDisplayArray[0]);
+  //buttonsDisplayArray[0].textContent = 'See Results!';
+  displayButtons.appendChild(buttonsDisplayArray[1]);
+  //buttonsDisplayArray[1].textContent = 'Give Me 10 More Clicks';
+}
+
 bag = storeObjectsArray.push(new ImageData('bag', 'img/bag.jpg'));
 banana = storeObjectsArray.push(new ImageData('banana', 'img/banana.jpg'));
 bathroom = storeObjectsArray.push(new ImageData('bathroom', 'img/bathroom.jpg'));
@@ -93,6 +118,8 @@ function collectTrackerDataFromClick(event){
   if (totalClicks < 25){
     placeImage();
   } else{
-    alert('Game Over, you clicked 25 times!');
+    var displayImages = document.getElementById('display-images');
+    displayImages.textContent = '';
+    placeButtons();
   }
 }
