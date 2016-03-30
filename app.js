@@ -1,4 +1,3 @@
-var randomImages = ['img/bag.jpg', 'img/banana.jpg', 'img/bathroom.jpg', 'img/boots.jpg', 'img/breakfast.jpg', 'img/bubblegum.jpg', 'img/chair.jpg', 'img/cthulhu.jpg', 'img/dog-duck.jpg', 'img/dragon.jpg', 'img/pen.jpg', 'img/pet-sweep.jpg', 'img/scissors.jpg', 'img/shark.jpg', 'img/sweep.png', 'img/tauntaun.jpg', 'img/unicorn.jpg', 'img/usb.gif', 'img/water-can.jpg', 'img/wine-glass.jpg'];
 var bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, usb, watercan, wineglass;
 var storeObjectsArray = [];
 var totalClicks = 0;
@@ -14,40 +13,50 @@ function ImageData(name, src){
   this.timesClicked = 0;
 }
 
-//SurveyImage.prototype.renderImage = function (){
+function createThreeImages(){
+  var imageLeft = document.createElement('img');
+  var imageMiddle = document.createElement('img');
+  var imageRight = document.createElement('img');
 
-var imageLeft = document.createElement('img');
+  // create 3 random numbers
+  // increment the objects displayedTime value at that index
+  // we set selectImage1-3 to equal the object at the random number index
+  var randomindex1 = getRandomImage(0,storeObjectsArray.length - 1);
+  var randomindex2 = getRandomImage(0,storeObjectsArray.length - 1);
+  var randomindex3 = getRandomImage(0, storeObjectsArray.length - 1);
 
-var imageMiddle = document.createElement('img');
+  var selectImage1 = storeObjectsArray[randomindex1];
+  var selectImage2 = storeObjectsArray[randomindex2];
+  var selectImage3 = storeObjectsArray[randomindex3];
 
-var imageRight = document.createElement('img');
+  storeObjectsArray[randomindex1].timesdisplayed++;
+  storeObjectsArray[randomindex2].timesdisplayed++;
+  storeObjectsArray[randomindex3].timesdisplayed++;
 
-var selectImage1 = randomImages[getRandomImage(0,19)];
+  imageLeft.setAttribute('src', selectImage1.src);
+  imageLeft.setAttribute('id', selectImage1.name);
+  imageLeft.addEventListener('click', collectTrackerDataFromClick);
+  console.log(imageLeft);
+  imageMiddle.setAttribute('src', selectImage2.src);
+  imageMiddle.setAttribute('id', selectImage2.name);
+  imageMiddle.addEventListener('click', collectTrackerDataFromClick);
+  console.log(imageMiddle);
+  imageRight.setAttribute('src', selectImage3.src);
+  imageRight.setAttribute('id', selectImage3.name);
+  imageRight.addEventListener('click', collectTrackerDataFromClick);
+  console.log(imageRight);
 
-var selectImage2 = randomImages[getRandomImage(0,19)];
-var selectImage3 = randomImages[getRandomImage(0,19)];
-var choice1 = document.getElementById('image1');
-//choice1.textContent = 'img/bag.jpg';
-var choice2 = document.getElementById('image1');
-var choice3 = document.getElementById('image1');
-
-function placeImage(idtag){
-  imageLeft.setAttribute('src', selectImage1);
-  console.log(selectImage1);
-  choice1.appendChild(imageLeft);
-  imageMiddle.setAttribute('src', selectImage2);
-  console.log(selectImage2);
-  choice2.appendChild(imageMiddle);
-  imageRight.setAttribute('src', selectImage3);
-  console.log(selectImage3);
-  choice3.appendChild(imageRight);
-
+  return [imageLeft, imageMiddle, imageRight];
 }
 
-function deleteImages(image){
-  choice1.removeChild(imageLeft);
-  choice2.removeChild(imageMiddle);
-  choice3.removeChild(imageRight);
+function placeImage(){
+  var displayImages = document.getElementById('display-images');
+  //below clears the image so a new one can be input
+  displayImages.textContent = '';
+  var imagesDisplayArray = createThreeImages();
+  displayImages.appendChild(imagesDisplayArray[0]);
+  displayImages.appendChild(imagesDisplayArray[1]);
+  displayImages.appendChild(imagesDisplayArray[2]);
 }
 
 bag = storeObjectsArray.push(new ImageData('bag', 'img/bag.jpg'));
@@ -71,7 +80,7 @@ usb = storeObjectsArray.push(new ImageData('usb', 'img/usb.gif'));
 watercan = storeObjectsArray.push(new ImageData('watercan', 'img/water-can.jpg'));
 wineglass = storeObjectsArray.push(new ImageData('wineglass', 'img/wine-glass.jpg'));
 
-placeImage('image1');
+placeImage();
 
 function collectTrackerDataFromClick(event){
   totalClicks++;
@@ -82,12 +91,8 @@ function collectTrackerDataFromClick(event){
     }
   }
   if (totalClicks < 25){
-    deleteImages(imageLeft, imageMiddle, imageRight);
-    placeImage('image1');
+    placeImage();
   } else{
-    deleteImages(imageLeft, imageMiddle, imageRight);
+    alert('Game Over, you clicked 25 times!');
   }
 }
-
-var trackImages = document.getElementById('gamepage');
-trackImages.addEventListener('click', collectTrackerDataFromClick);
