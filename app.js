@@ -23,6 +23,7 @@ var imageMiddle = document.createElement('img');
 var imageRight = document.createElement('img');
 
 var selectImage1 = randomImages[getRandomImage(0,19)];
+
 var selectImage2 = randomImages[getRandomImage(0,19)];
 var selectImage3 = randomImages[getRandomImage(0,19)];
 var choice1 = document.getElementById('image1');
