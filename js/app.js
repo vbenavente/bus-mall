@@ -52,6 +52,8 @@ function createThreeImages(){
 }
 
 function placeImage(){
+  var displayButtons = document.getElementById('display-buttons');
+  displayButtons.textContent = '';
   var displayImages = document.getElementById('display-images');
   //below clears the image so a new one can be input
   displayImages.textContent = '';
@@ -65,7 +67,7 @@ function createButtons(){
   var buttonResults = document.createElement('button');
   buttonResults.addEventListener('click', chart);
   var buttonMoreClicks = document.createElement('button');
-  buttonMoreClicks.addEventListener('click', placeImage, totalClicks++);
+  buttonMoreClicks.addEventListener('click', collectTrackerDataFromClick);
 
   return [buttonResults, buttonMoreClicks];
 }
@@ -75,7 +77,6 @@ function chart(){
   var displayButtons = document.getElementById('display-buttons');
   displayButtons.textContent = '';
   var displayImages = document.getElementById('display-images');
-  //below clears the image so a new one can be input
   displayImages.textContent = '';
   // bar chart data
   var barData = {
@@ -94,7 +95,7 @@ function chart(){
       {
         fillColor : 'gba(73,188,170,0.4)',
         strokeColor : 'gba(72,174,209,0.4)',
-        data : [(storeObjectsArray[0].timesClicked / storeObjectsArray[0].timesdisplayed),(storeObjectsArray[1].timesClicked / storeObjectsArray[1].timesdisplayed),(storeObjectsArray[2].timesClicked / storeObjectsArray[2].timesdisplayed),(storeObjectsArray[3].timesClicked / storeObjectsArray[3].timesdisplayed),(storeObjectsArray[4].timesClicked / storeObjectsArray[4].timesdisplayed),(storeObjectsArray[5].timesClicked / storeObjectsArray[5].timesdisplayed),(storeObjectsArray[6].timesClicked / storeObjectsArray[6].timesdisplayed),(storeObjectsArray[7].timesClicked / storeObjectsArray[7].timesdisplayed),(storeObjectsArray[8].timesClicked / storeObjectsArray[8].timesdisplayed),(storeObjectsArray[9].timesClicked / storeObjectsArray[9].timesdisplayed),(storeObjectsArray[10].timesClicked / storeObjectsArray[10].timesdisplayed),(storeObjectsArray[11].timesClicked / storeObjectsArray[11].timesdisplayed),(storeObjectsArray[12].timesClicked / storeObjectsArray[12].timesdisplayed),(storeObjectsArray[13].timesClicked / storeObjectsArray[13].timesdisplayed),(storeObjectsArray[14].timesClicked / storeObjectsArray[14].timesdisplayed),(storeObjectsArray[15].timesClicked / storeObjectsArray[15].timesdisplayed),(storeObjectsArray[16].timesClicked / storeObjectsArray[16].timesdisplayed),(storeObjectsArray[17].timesClicked / storeObjectsArray[17].timesdisplayed),(storeObjectsArray[18].timesClicked / storeObjectsArray[18].timesdisplayed)]
+        data : [(storeObjectsArray[0].timesClicked / storeObjectsArray[0].timesdisplayed),(storeObjectsArray[1].timesClicked / storeObjectsArray[1].timesdisplayed),(storeObjectsArray[2].timesClicked / storeObjectsArray[2].timesdisplayed),(storeObjectsArray[3].timesClicked / storeObjectsArray[3].timesdisplayed),(storeObjectsArray[4].timesClicked / storeObjectsArray[4].timesdisplayed),(storeObjectsArray[5].timesClicked / storeObjectsArray[5].timesdisplayed),(storeObjectsArray[6].timesClicked / storeObjectsArray[6].timesdisplayed),(storeObjectsArray[7].timesClicked / storeObjectsArray[7].timesdisplayed),(storeObjectsArray[8].timesClicked / storeObjectsArray[8].timesdisplayed),(storeObjectsArray[9].timesClicked / storeObjectsArray[9].timesdisplayed),(storeObjectsArray[10].timesClicked / storeObjectsArray[10].timesdisplayed),(storeObjectsArray[11].timesClicked / storeObjectsArray[11].timesdisplayed),(storeObjectsArray[12].timesClicked / storeObjectsArray[12].timesdisplayed),(storeObjectsArray[13].timesClicked / storeObjectsArray[13].timesdisplayed),(storeObjectsArray[14].timesClicked / storeObjectsArray[14].timesdisplayed),(storeObjectsArray[15].timesClicked / storeObjectsArray[15].timesdisplayed),(storeObjectsArray[16].timesClicked / storeObjectsArray[16].timesdisplayed),(storeObjectsArray[17].timesClicked / storeObjectsArray[17].timesdisplayed),(storeObjectsArray[18].timesClicked / storeObjectsArray[18].timesdisplayed),(storeObjectsArray[19].timesClicked / storeObjectsArray[19].timesdisplayed)]
       }
     ]
   };
@@ -141,6 +142,7 @@ wineglass = storeObjectsArray.push(new ImageData('wineglass', 'img/wine-glass.jp
 placeImage();
 
 function collectTrackerDataFromClick(event){
+  placeImage();
   totalClicks++;
   console.log('event.target: ', event.target);
   console.table(storeObjectsArray);
@@ -149,11 +151,13 @@ function collectTrackerDataFromClick(event){
       storeObjectsArray[i].timesClicked++;
     }
   }
-  if (totalClicks < 25 ){
+  if (totalClicks < 25) {
     placeImage();
-  } else {
+  } else if (totalClicks === 25) {
     var displayImages = document.getElementById('display-images');
     displayImages.textContent = '';
     placeButtons();
+  } else if (totalClicks === 35){
+    chart();
   }
 }
