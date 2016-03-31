@@ -3,6 +3,23 @@ var bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogduck,
 var storeObjectsArray = [];
 var totalClicks = 0;
 
+function saveChartToStorage(){
+  localStorage.setItem('chartdata', JSON.stringify(storeObjectsArray));
+};
+function fetchChartFromStorage(){
+  var userChart = JSON.parse(localStorage.getItem('chartdata'));
+  if (userChart){
+    console.log('chart saved');
+    storeObjectArray = userChart;
+  }
+}
+
+function handleClearLsClick(){
+  localStorage.clear();
+}
+
+fetchChartFromStorage();
+
 //Object Constructor
 function ImageData(name, src){
   this.name = name;
@@ -61,6 +78,12 @@ function placeImage(){
   displayImages.appendChild(imagesDisplayArray[0]);
   displayImages.appendChild(imagesDisplayArray[1]);
   displayImages.appendChild(imagesDisplayArray[2]);
+
+  var clearLsButton = document.createElement('button');
+  clearLsButton.addEventListener('click', handleClearLsClick);
+  var clear = document.getElementById('display-buttons');
+  clear.appendChild(clearLsButton);
+  clearLsButton.textContent = 'Clear Local Storage';
 }
 
 function createButtons(){
@@ -142,6 +165,7 @@ wineglass = storeObjectsArray.push(new ImageData('wineglass', 'img/wine-glass.jp
 placeImage();
 
 function collectTrackerDataFromClick(event){
+  saveChartToStorage();
   placeImage();
   totalClicks++;
   console.log('event.target: ', event.target);
