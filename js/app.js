@@ -72,6 +72,27 @@ function createButtons(){
 
 //add my chart, this function runs when buttonResults is clicked
 function chart(){
+  // bar chart data
+  var barData = {
+    labels : ['bag','banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep','scissors','shark','sweep','tauntaun','unicorn','usb','water-can','wine-glass'],
+    datasets : [
+      {
+        fillColor : '#48A497',
+        strokeColor : '#48A4D1',
+        data : [456,479,324,569,702,600]
+      },
+      {
+        fillColor : 'gba(73,188,170,0.4)',
+        strokeColor : 'gba(72,174,209,0.4)',
+        data : [364,504,605,400,345,320]
+      }
+    ]
+  };
+            // get bar chart canvas
+  var income = document.getElementById('chart').getContext('2d');
+            // draw bar chart
+  new Chart(income).Bar(barData);
+
   console.log('poop');
 }
 
@@ -120,13 +141,9 @@ function collectTrackerDataFromClick(event){
   }
   if (totalClicks < 25 ){
     placeImage();
-  } else if (totalClicks = 25){
+  } else {
     var displayImages = document.getElementById('display-images');
     displayImages.textContent = '';
     placeButtons();
-  } else if(25 < totalClicks < 36){
-    placeImage();
-  } else {
-    chart();
   }
 }
