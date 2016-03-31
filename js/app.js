@@ -72,6 +72,11 @@ function createButtons(){
 
 //add my chart, this function runs when buttonResults is clicked
 function chart(){
+  var displayButtons = document.getElementById('display-buttons');
+  displayButtons.textContent = '';
+  var displayImages = document.getElementById('display-images');
+  //below clears the image so a new one can be input
+  displayImages.textContent = '';
   // bar chart data
   var barData = {
     labels : ['bag','banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep','scissors','shark','sweep','tauntaun','unicorn','usb','water-can','wine-glass'],
@@ -79,21 +84,26 @@ function chart(){
       {
         fillColor : '#48A497',
         strokeColor : '#48A4D1',
-        data : [456,479,324,569,702,600]
+        data : [storeObjectsArray[0].timesdisplayed,storeObjectsArray[1].timesdisplayed,storeObjectsArray[2].timesdisplayed,storeObjectsArray[3].timesdisplayed,storeObjectsArray[4].timesdisplayed,storeObjectsArray[5].timesdisplayed,storeObjectsArray[6].timesdisplayed,storeObjectsArray[7].timesdisplayed,storeObjectsArray[8].timesdisplayed,storeObjectsArray[9].timesdisplayed,storeObjectsArray[10].timesdisplayed,storeObjectsArray[11].timesdisplayed,storeObjectsArray[12].timesdisplayed,storeObjectsArray[13].timesdisplayed,storeObjectsArray[14].timesdisplayed,storeObjectsArray[15].timesdisplayed,storeObjectsArray[16].timesdisplayed,storeObjectsArray[17].timesdisplayed,storeObjectsArray[18].timesdisplayed,storeObjectsArray[19].timesdisplayed]
       },
       {
         fillColor : 'gba(73,188,170,0.4)',
         strokeColor : 'gba(72,174,209,0.4)',
-        data : [364,504,605,400,345,320]
+        data : [storeObjectsArray[0].timesClicked,storeObjectsArray[1].timesClicked,storeObjectsArray[2].timesClicked,storeObjectsArray[3].timesClicked,storeObjectsArray[4].timesClicked,storeObjectsArray[5].timesClicked,storeObjectsArray[6].timesClicked,storeObjectsArray[7].timesClicked,storeObjectsArray[8].timesClicked,storeObjectsArray[9].timesClicked,storeObjectsArray[10].timesClicked,storeObjectsArray[11].timesClicked,storeObjectsArray[12].timesClicked,storeObjectsArray[13].timesClicked,storeObjectsArray[14].timesClicked,storeObjectsArray[15].timesClicked,storeObjectsArray[16].timesClicked,storeObjectsArray[17].timesClicked,storeObjectsArray[18].timesClicked,storeObjectsArray[19].timesClicked]
+      },
+      {
+        fillColor : 'gba(73,188,170,0.4)',
+        strokeColor : 'gba(72,174,209,0.4)',
+        data : [(storeObjectsArray[0].timesClicked / storeObjectsArray[0].timesdisplayed),(storeObjectsArray[1].timesClicked / storeObjectsArray[1].timesdisplayed),(storeObjectsArray[2].timesClicked / storeObjectsArray[2].timesdisplayed),(storeObjectsArray[3].timesClicked / storeObjectsArray[3].timesdisplayed),(storeObjectsArray[4].timesClicked / storeObjectsArray[4].timesdisplayed),(storeObjectsArray[5].timesClicked / storeObjectsArray[5].timesdisplayed),(storeObjectsArray[6].timesClicked / storeObjectsArray[6].timesdisplayed),(storeObjectsArray[7].timesClicked / storeObjectsArray[7].timesdisplayed),(storeObjectsArray[8].timesClicked / storeObjectsArray[8].timesdisplayed),(storeObjectsArray[9].timesClicked / storeObjectsArray[9].timesdisplayed),(storeObjectsArray[10].timesClicked / storeObjectsArray[10].timesdisplayed),(storeObjectsArray[11].timesClicked / storeObjectsArray[11].timesdisplayed),(storeObjectsArray[12].timesClicked / storeObjectsArray[12].timesdisplayed),(storeObjectsArray[13].timesClicked / storeObjectsArray[13].timesdisplayed),(storeObjectsArray[14].timesClicked / storeObjectsArray[14].timesdisplayed),(storeObjectsArray[15].timesClicked / storeObjectsArray[15].timesdisplayed),(storeObjectsArray[16].timesClicked / storeObjectsArray[16].timesdisplayed),(storeObjectsArray[17].timesClicked / storeObjectsArray[17].timesdisplayed),(storeObjectsArray[18].timesClicked / storeObjectsArray[18].timesdisplayed)]
       }
     ]
   };
             // get bar chart canvas
-  var income = document.getElementById('chart').getContext('2d');
+  var images = document.getElementById('chart').getContext('2d');
             // draw bar chart
-  new Chart(income).Bar(barData);
+  new Chart(images).Bar(barData);
 
-  console.log('poop');
+  console.log('chart works!');
 }
 
 function placeButtons(){
