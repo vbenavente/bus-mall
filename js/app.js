@@ -1,16 +1,18 @@
+//Global Variables
 var bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, usb, watercan, wineglass;
 var storeObjectsArray = [];
 var totalClicks = 0;
 
-function getRandomImage(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
+//Object Constructor
 function ImageData(name, src){
   this.name = name;
   this.src = src;
   this.timesdisplayed = 0;
   this.timesClicked = 0;
+}
+
+function getRandomImage(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function createThreeImages(){
@@ -36,15 +38,15 @@ function createThreeImages(){
   imageLeft.setAttribute('src', selectImage1.src);
   imageLeft.setAttribute('id', selectImage1.name);
   imageLeft.addEventListener('click', collectTrackerDataFromClick);
-  console.log(imageLeft);
+  //console.log(imageLeft);
   imageMiddle.setAttribute('src', selectImage2.src);
   imageMiddle.setAttribute('id', selectImage2.name);
   imageMiddle.addEventListener('click', collectTrackerDataFromClick);
-  console.log(imageMiddle);
+  //console.log(imageMiddle);
   imageRight.setAttribute('src', selectImage3.src);
   imageRight.setAttribute('id', selectImage3.name);
   imageRight.addEventListener('click', collectTrackerDataFromClick);
-  console.log(imageRight);
+  //console.log(imageRight);
 
   return [imageLeft, imageMiddle, imageRight];
 }
@@ -63,27 +65,27 @@ function createButtons(){
   var buttonResults = document.createElement('button');
   buttonResults.addEventListener('click', chart);
   var buttonMoreClicks = document.createElement('button');
-  buttonMoreClicks.addEventListener('click', collectTrackerDataFromClick2);
+  buttonMoreClicks.addEventListener('click', placeImage, totalClicks++);
 
   return [buttonResults, buttonMoreClicks];
 }
 
+//add my chart, this function runs when buttonResults is clicked
 function chart(){
   console.log('poop');
-}
-function collectTrackerDataFromClick2(){
-  console.log('dontcare');
 }
 
 function placeButtons(){
   var displayButtons = document.getElementById('display-buttons');
+  displayButtons.textContent = '';
   var buttonsDisplayArray = createButtons();
   displayButtons.appendChild(buttonsDisplayArray[0]);
-  //buttonsDisplayArray[0].textContent = 'See Results!';
+  buttonsDisplayArray[0].textContent = 'See Results!';
   displayButtons.appendChild(buttonsDisplayArray[1]);
-  //buttonsDisplayArray[1].textContent = 'Give Me 10 More Clicks';
+  buttonsDisplayArray[1].textContent = 'Give Me 10 More Clicks';
 }
 
+//.push is a method on the array
 bag = storeObjectsArray.push(new ImageData('bag', 'img/bag.jpg'));
 banana = storeObjectsArray.push(new ImageData('banana', 'img/banana.jpg'));
 bathroom = storeObjectsArray.push(new ImageData('bathroom', 'img/bathroom.jpg'));
@@ -110,16 +112,21 @@ placeImage();
 function collectTrackerDataFromClick(event){
   totalClicks++;
   console.log('event.target: ', event.target);
+  console.table(storeObjectsArray);
   for(var i = 0; i < storeObjectsArray.length; i++){
     if(storeObjectsArray[i].name === event.target.id){
       storeObjectsArray[i].timesClicked++;
     }
   }
-  if (totalClicks < 25){
+  if (totalClicks < 25 ){
     placeImage();
-  } else{
+  } else if (totalClicks = 25){
     var displayImages = document.getElementById('display-images');
     displayImages.textContent = '';
     placeButtons();
+  } else if(25 < totalClicks < 36){
+    placeImage();
+  } else {
+    chart();
   }
 }
