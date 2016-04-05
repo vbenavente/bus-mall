@@ -52,14 +52,17 @@ function createThreeImages(){
   storeObjectsArray[randomindex2].timesdisplayed++;
   storeObjectsArray[randomindex3].timesdisplayed++;
 
+  imageLeft.setAttribute('class', 'color');
   imageLeft.setAttribute('src', selectImage1.src);
   imageLeft.setAttribute('id', selectImage1.name);
   imageLeft.addEventListener('click', collectTrackerDataFromClick);
   //console.log(imageLeft);
+  imageMiddle.setAttribute('class', 'color');
   imageMiddle.setAttribute('src', selectImage2.src);
   imageMiddle.setAttribute('id', selectImage2.name);
   imageMiddle.addEventListener('click', collectTrackerDataFromClick);
   //console.log(imageMiddle);
+  imageRight.setAttribute('class', 'color');
   imageRight.setAttribute('src', selectImage3.src);
   imageRight.setAttribute('id', selectImage3.name);
   imageRight.addEventListener('click', collectTrackerDataFromClick);

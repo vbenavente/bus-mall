@@ -1,14 +1,26 @@
+
+
 div{
   display:inline-block;
   padding: 50px;
+}
+
+div img.color:hover{
+  background:#53a7ea;
 }
 
 img{
   display:inline-block;
   height: 200px;
   width: 200px;
+  padding: 50px;
 }
 
 button{
   display:inline-block;
+}
+
+.borders{
+  position: relative;
+  border: 5px solid #foo;
 }
